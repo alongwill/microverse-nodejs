@@ -1,37 +1,33 @@
 /*
- * https://nodejs.org/api/synopsis.html
+ * Testing arrow functions
  */
-const http = require('http');
-
-const hostname = '127.0.0.1';
-const port = 3000;
-
+const arr = ['a','b','c'];
 
 function Prefixer(prefix) {
       this.prefix = prefix;
 }
 
-// Prefixer.prototype.prefixArray = function (arr) {
-//       return arr.map(function (x) {
-//       return this.prefix + x;
-//       }, this); // (A)
-// };
 Prefixer.prototype.prefixArray = function (arr) {
+    return arr.map(function (x) {
+        return this.prefix + x;
+      }, this); // (A)
+};
+
+normal = new Prefixer("OLD");
+console.log("Result using standard function:")
+console.log("    " + normal.prefixArray(arr));
+
+
+
+
+function ArrowPrefixer(prefix) {
+      this.prefix = prefix;
+}
+
+ArrowPrefixer.prototype.prefixArray = function (arr) {
       return arr.map((x) => this.prefix + x); // (A)
 };
 
-const arr = ['a','b','c'];
-p = new Prefixer("PRE");
-
-
-const server = http.createServer((req, res) => {
-      res.statusCode = 200;
-      res.setHeader('Content-Type', 'text/plain');
-      res.end('Hello World\n');
-
-});
-
-server.listen(port, hostname, () => {
-      console.log(`Server running at http://${hostname}:${port}/`);
-      console.log(p.prefixArray(arr));
-});
+arrow = new ArrowPrefixer("NEW");
+console.log("Result using arrow function:")
+console.log("    " + arrow.prefixArray(arr));
