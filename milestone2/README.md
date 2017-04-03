@@ -1,5 +1,5 @@
 *expressjs-myapp*
-The express js app
+The express js app task.
 
-*simple*
-
+*sandbox*
+Individual NodeJS test files.
