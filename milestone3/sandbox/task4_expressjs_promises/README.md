@@ -1,5 +1,10 @@
-   install dependencies:
-     $ cd task4_app && npm install
+```bash    
+	# Build boilerplate with express
+	express --view=pug task4_app
 
-   run the app:
-     $ DEBUG=task4-app:* npm start
+	# install dependencies:
+    $ cd task4_app && npm install
+ 
+    # run the app:
+    $ DEBUG=task4-app:* npm start
+```
