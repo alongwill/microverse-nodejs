@@ -76,4 +76,15 @@ router.put('/update', function(req, res, next) {
   }
 });
 
+router.delete('/delete/:id', function(req, res, next) {
+  var id = parseInt(req.params.id);
+  if (map.has(id)) {
+    var event = map.get(id);
+    map.remove(id);
+    res.json(event);
+  } else {
+    res.json('unknown id ' + id);
+  }
+});
+
 module.exports = router;
