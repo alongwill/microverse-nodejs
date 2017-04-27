@@ -56,5 +56,24 @@ router.post('/add', function(req, res, next) {
   index++;
   res.json(event);
 });
+/* REQUIREMENT-6:
+ * UPDATE existing event
+ * {
+ *   'id'          : 0,
+ *   'title'       : 'A Title',
+ *   'description' : 'A Description'
+ * }
+ */
+router.put('/update', function(req, res, next) {  
+  var id = parseInt(req.body.id);
+  if (map.has(id)) {
+    map.get(id).title = req.body.title;
+    map.get(id).description = req.body.description;
+
+    res.json(map.get(id));
+  } else {
+    res.json('unknown id ' + id);
+  }
+});
 
 module.exports = router;
