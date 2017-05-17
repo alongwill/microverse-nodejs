@@ -26,6 +26,7 @@ router.get('/list', function(req, res, next) {
   });
   res.json(result);
 });
+
 function getEvent(idAsString) {
   return new Promise((resolve,reject)=> {
     var id = parseInt(idAsString);
@@ -33,7 +34,7 @@ function getEvent(idAsString) {
       resolve(map.get(id))
       //res.json(map.get(id));
     } else {
-      reject('unknown id ' + id);
+      reject(Error('unknown id ' + idAsString));
     }
   });
 }
@@ -41,17 +42,13 @@ function getEvent(idAsString) {
  * GET a specific event. 
  */
 router.get('/get/:id', function(req, res, next) {
-  //console.log(req.params);
-  // getEvent(req.params.id).then((event) => {
-  //   res.json(event);
-  // }).catch(error);  
   getEvent(req.params.id).then(function(event) {
     console.log(event);
+    // TODO: Why does this have to be returned?
     return res.json(event);
-  }).catch(function(error) {
+  }, function(error) {
     console.log("Failed!", error);
   });
-  
 });
 
 /* REQUIREMENT-5:
