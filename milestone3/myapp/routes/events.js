@@ -26,18 +26,32 @@ router.get('/list', function(req, res, next) {
   });
   res.json(result);
 });
-
+function getEvent(idAsString) {
+  return new Promise((resolve,reject)=> {
+    var id = parseInt(idAsString);
+    if (map.has(id)) {
+      resolve(map.get(id))
+      //res.json(map.get(id));
+    } else {
+      reject('unknown id ' + id);
+    }
+  });
+}
 /* REQUIREMENT-4:
  * GET a specific event. 
  */
 router.get('/get/:id', function(req, res, next) {
   //console.log(req.params);
-  var id = parseInt(req.params.id);
-  if (map.has(id)) {
-    res.json(map.get(id));
-  } else {
-    res.json('unknown id ' + id);
-  }
+  // getEvent(req.params.id).then((event) => {
+  //   res.json(event);
+  // }).catch(error);  
+  getEvent(req.params.id).then(function(event) {
+    console.log(event);
+    return res.json(event);
+  }).catch(function(error) {
+    console.log("Failed!", error);
+  });
+  
 });
 
 /* REQUIREMENT-5:
